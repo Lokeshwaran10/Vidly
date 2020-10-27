@@ -12,8 +12,7 @@ namespace Vidly.Controllers
         // GET: Movies/Random 
         public ActionResult Random()
         {
-            var movie = new Movie() { Name = "Shrek!" };
-
+            var movie = new Movie() { Name = "Shrek!" };  
               return View(movie);
             
         } 
@@ -21,5 +20,18 @@ namespace Vidly.Controllers
         {
             return Content("id=" + id);
         }
+        
+        //movies
+        public ActionResult Index(int? PageIndex, string sortBy)
+        {
+            if (!PageIndex.HasValue)
+                PageIndex = 1;
+
+            if (String.IsNullOrWhiteSpace(sortBy))
+                sortBy = "Name";
+
+            return Content(String.Format("pageIndex={0}&sortBy={1}",PageIndex, sortBy));
+        }
+
     }
 }
